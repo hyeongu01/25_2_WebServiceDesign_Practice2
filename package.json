@@ -1,0 +1,21 @@
+{
+  "name": "02_memopadbackend",
+  "version": "1.0.0",
+  "description": "1. HTTP 메소드별 API 구현 2. POST / GET / PUT / DELETE 각각 2개씩 총 8개의 API 구현 3. 미들웨어 구현 4. 응답 코드 다양성 확보 5. 표준화된 응답 형식 사용",
+  "main": "Memo.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hyeongu01/25_2_WebServiceDesign_Practice2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hyeongu01/25_2_WebServiceDesign_Practice2/issues"
+  },
+  "homepage": "https://github.com/hyeongu01/25_2_WebServiceDesign_Practice2#readme",
+  "type": "commonjs"
+}
