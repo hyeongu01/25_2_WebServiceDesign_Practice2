@@ -2,11 +2,13 @@ class Memo {
     constructor(
         id,
         title,
-        content = null,
-        createdAt = Date.now(),
-        updatedAt = Date.now(),
-        deletedAt = null,
-        tagId = null
+        {
+            content = null,
+            tagId = null,
+            createdAt = Date.now(),
+            updatedAt = Date.now(),
+            deletedAt = null
+        }
     ) {
         this.id = id;
         this.title = title;
@@ -17,11 +19,21 @@ class Memo {
         this.tagId = tagId;
     }
 
-    static fromJson(json) {
-
+    static fromJsonObject(json) {
+        return new Memo(
+            json.id,
+            json.title,
+            {
+                content: json.content,
+                createdAt: json.createdAt,
+                updatedAt: json.updatedAt,
+                deletedAt: json.deletedAt,
+                tagId: json.tagId
+            }
+        )
     }
 
-    static fromString(str) {
+    static fromJsonString(str) {
 
     }
 
@@ -33,3 +45,5 @@ class Memo {
 
     }
 }
+
+module.exports = Memo;
