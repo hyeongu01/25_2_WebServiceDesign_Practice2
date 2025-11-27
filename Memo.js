@@ -34,11 +34,23 @@ class Memo {
     }
 
     static fromJsonString(str) {
-
+        const obj = JSON.parse(str);
+        return Memo.fromJsonObject(obj);
     }
 
-    update(newTitle, newContent, newTag) {
-
+    update({newTitle, newContent, newTag}) {
+        if (newTitle !== undefined && this.title !== newTitle) {
+            this.title = newTitle;
+            this.updatedAt = Date.now();
+        }
+        if (newContent !== undefined && this.content !== newContent) {
+            this.content = newContent;
+            this.updatedAt = Date.now();
+        }
+        if (newTag !== undefined && this.tagId !== newTag) {
+            this.tagId = newTag;
+            this.updatedAt = Date.now();
+        }
     }
 
     delete() {

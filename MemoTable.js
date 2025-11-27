@@ -15,9 +15,9 @@ class MemoTable {
     static async read(path) {
         try {
             const text = await fs.readFile(path, {encoding: "utf-8"});
-            console.log(text)
+            // console.log(text)
             const json = JSON.parse(text);
-            console.log(json)
+            // console.log(json)
             return MemoTable.fromJsonObject(json);
         } catch(err) {
             console.log(new MemoTable(path))
@@ -29,6 +29,9 @@ class MemoTable {
         try {
             const text = await fs.readFile(path, {encoding: "utf-8"});
             const memo = JSON.parse(text).data.find(m => m.id === id);
+            if (!memo) {
+                throw id;
+            }
 
             return Memo.fromJsonObject(memo);
         } catch(err) {
@@ -60,16 +63,42 @@ class MemoTable {
         this.data.push(newMemo);
     }
 
-    update() {
+    update(id, {title, content, tagId}) {
+        this.data = this.data.map(m => {
+            if (m.id === id) {
+                m.update({newTitle: title, newContent: content, newTag: tagId});
+            }
+            return m;
+        })
+    }
 
+    delete(id) {
+        const target = this.data.find(m => m.id === id);
+        if (!target.deletedAt) {
+            target.deletedAt = Date.now();
+        }
     }
 }
 
-(async (path) => {
-    const mt = await MemoTable.read(path);
-    // mt.add("test2");
-    console.log(mt);
-    const memo = await MemoTable.readById(path, 0);
-    console.log(memo)
-    await mt.write();
-})("./tempStorage.json");
+// (async (path) => {
+//     const mt = await MemoTable.read(path);
+//     // mt.add("test2");
+//     console.log(mt);
+//     const memo = await MemoTable.readById(path, 5);
+//     console.log(memo)
+//     await mt.write();
+// })("./tempStorage.json").catch(err=>{
+//     console.log(err)
+// });
+
+// (async (path) => {
+//     const mt = await MemoTable.read(path);
+//     console.log(mt);
+//     // mt.update(0, {title: "updated"});
+//     // console.log(mt);
+//     // mt.delete(1);
+//     // console.log(mt)
+//     await mt.write();
+// })("./tempStorage.json");
+
+module.exports = MemoTable;
