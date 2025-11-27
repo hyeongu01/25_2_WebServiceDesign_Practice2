@@ -3,6 +3,7 @@ const app = express();
 
 const memoRouter = require("./routers/memoRouter");
 
+app.use(express.json());
 
 app.use("/api/memos", memoRouter);
 

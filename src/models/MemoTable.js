@@ -14,6 +14,7 @@ class MemoTable {
     // 경로에 파일이 없거나 내용이 없으면 빈 내용을 생성
     static async read() {
         try {
+            console.log(MEMO_PATH)
             const text = await fs.readFile(MEMO_PATH, {encoding: "utf-8"});
             // console.log(text)
             const json = JSON.parse(text);

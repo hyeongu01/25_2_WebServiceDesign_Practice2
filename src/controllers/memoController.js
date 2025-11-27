@@ -18,7 +18,9 @@ const ErrorRequestForm = (error, message) => {
 module.exports = {
     // 1. 메모 생성
     async createMemo(req, res) {
+        console.log(req.body);
         const { title, content, tagId } = req.body;
+        
 
         // title 이 falsy 인 경우 400 Bad Request
         if (!title) {
@@ -47,7 +49,9 @@ module.exports = {
     // 3. 메모 전체 읽기
     async getAllMemos(req, res) {
         const mt = await MemoTable.read();
-        const memos = mt.data;
+        let memos = mt.data;
+        // 삭제된거 필터링
+        memos = memos.filter(m => m.deletedAt === null);
 
         return res.status(200).json({
             data: memos,
@@ -56,7 +60,7 @@ module.exports = {
                 timestamp: Date.now()
             }
         });
-    },
+    }, 
 
 //     // 4. 메모 선택 읽기
 //     async getMemoById(req, res) {
