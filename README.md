@@ -103,30 +103,28 @@
   - 200 OK
     ```json
     {
-        "data": {
-            "counts": 2,
-            "memos": [
-                {
-                    "id": 0,
-                    "title": "test0",
-                    "content": "testestsfdsfsdfaf",
-                    "createdAt": 1764257258171,
-                    "updatedAt": 1764257258171,
-                    "deletedAt": null,
-                    "tagId": null
-                },
-                {
-                    "id": 1,
-                    "title": "test1",
-                    "content": "testestsfdsfsdfaf",
-                    "createdAt": 1764257277114,
-                    "updatedAt": 1764257277114,
-                    "deletedAt": null,
-                    "tagId": null
-                }
-            ]
-        },
+        "data": [
+            {
+                "id": 0,
+                "title": "test0",
+                "content": "testestsfdsfsdfaf",
+                "createdAt": 1764257258171,
+                "updatedAt": 1764257258171,
+                "deletedAt": null,
+                "tagId": null
+            },
+            {
+                "id": 1,
+                "title": "test1",
+                "content": "testestsfdsfsdfaf",
+                "createdAt": 1764257277114,
+                "updatedAt": 1764257277114,
+                "deletedAt": null,
+                "tagId": null
+            }
+        ],
         "meta": {
+            "counts": 2,
             "timestamp": 1764257277114
         }
     }
@@ -168,22 +166,20 @@
   - 200 OK
     ```json
     {
-        "data": {
-            "counts": 2,
-            "tags": [
-                {
-                    "id": 0,
-                    "name": "book",
-                    "createdAt": 1764256356888
-                },
-                {
-                    "id": 1,
-                    "name": "study",
-                    "createdAt": 1764256356888
-                }
-            ]
-        },
+        "data": [
+            {
+                "id": 0,
+                "name": "book",
+                "createdAt": 1764256356888
+            },
+            {
+                "id": 1,
+                "name": "study",
+                "createdAt": 1764256356888
+            }
+        ],
         "meta": {
+            "counts": 2,
             "timestamp": 1764256356888
         }
     }
@@ -258,21 +254,19 @@
   - 200 OK
     ```json
     {
-        "data": {
-            "counts": 1,
-            "memos": [
-                {
-                    "id": 2,
-                    "title": "updated test3",
-                    "content": "testestsfdsfsdfaf",
-                    "createdAt": 1764257280650,
-                    "updatedAt": 1764257871757,
-                    "deletedAt": 1764257914434,
-                    "tagId": null
-                }
-            ]
-        },
+        "data": [
+            {
+                "id": 2,
+                "title": "updated test3",
+                "content": "testestsfdsfsdfaf",
+                "createdAt": 1764257280650,
+                "updatedAt": 1764257871757,
+                "deletedAt": 1764257914434,
+                "tagId": null
+            }
+        ],
         "meta": {
+            "counts": 1,
             "timestamp": 1764256356888
         }
     }
