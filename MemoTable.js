@@ -20,6 +20,7 @@ class MemoTable {
             // console.log(json)
             return MemoTable.fromJsonObject(json);
         } catch(err) {
+            console.log("파일 읽기 오류. 새로 생성합니다.")
             console.log(new MemoTable(path))
             return new MemoTable(path);
         }
@@ -33,7 +34,7 @@ class MemoTable {
                 throw id;
             }
 
-            return Memo.fromJsonObject(memo);
+            return Memo.read(memo);
         } catch(err) {
             throw `id: ${id} 인 메모가 없습니다.`
         }
@@ -47,7 +48,7 @@ class MemoTable {
         return new MemoTable(
             json.path,
             json.nextId,
-            json.data.map(Memo.fromJsonObject)
+            json.data.map(Memo.read)
         )
     }
 
@@ -75,27 +76,28 @@ class MemoTable {
     delete(id) {
         const target = this.data.find(m => m.id === id);
         if (!target.deletedAt) {
-            target.deletedAt = Date.now();
+            target.delete();
         }
     }
 }
 
-// (async (path) => {
-//     const mt = await MemoTable.read(path);
-//     // mt.add("test2");
-//     console.log(mt);
-//     const memo = await MemoTable.readById(path, 5);
-//     console.log(memo)
-//     await mt.write();
-// })("./tempStorage.json").catch(err=>{
-//     console.log(err)
-// });
+(async (path) => {
+    const mt = await MemoTable.read(path);
+    // mt.add("test2");
+    console.log(mt);
+    const memo = await MemoTable.readById(path, 0);
+    console.log(memo)
+    // await mt.write();
+})("./tempStorage.json").catch(err=>{
+    console.log(err)
+});
 
 // (async (path) => {
 //     const mt = await MemoTable.read(path);
 //     console.log(mt);
+//     mt.add("test3");
 //     // mt.update(0, {title: "updated"});
-//     // console.log(mt);
+//     console.log(mt);
 //     // mt.delete(1);
 //     // console.log(mt)
 //     await mt.write();

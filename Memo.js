@@ -19,7 +19,7 @@ class Memo {
         this.tagId = tagId;
     }
 
-    static fromJsonObject(json) {
+    static read(json) {
         return new Memo(
             json.id,
             json.title,
@@ -31,11 +31,6 @@ class Memo {
                 tagId: json.tagId
             }
         )
-    }
-
-    static fromJsonString(str) {
-        const obj = JSON.parse(str);
-        return Memo.fromJsonObject(obj);
     }
 
     update({newTitle, newContent, newTag}) {
@@ -54,7 +49,7 @@ class Memo {
     }
 
     delete() {
-
+        this.deletedAt = Date.now();
     }
 }
 
