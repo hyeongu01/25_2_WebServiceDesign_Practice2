@@ -63,6 +63,8 @@ class MemoTable {
             }
         );
         this.data.push(newMemo);
+
+        return newMemo;
     }
 
     update(id, {title, content, tagId}) {
@@ -111,13 +113,13 @@ class MemoTable {
 //     .catch(err => {console.log(err.message)})
 
 // update, delete 테스트
-(async () => {
-    const mt = await MemoTable.read();
-    // mt.update(5, {title: "updated test3"});
-    mt.delete(2);
-    await mt.write();
-})()
-    .catch(err => console.log(err.message));
+// (async () => {
+//     const mt = await MemoTable.read();
+//     // mt.update(5, {title: "updated test3"});
+//     mt.delete(2);
+//     await mt.write();
+// })()
+//     .catch(err => console.log(err.message));
 
 // 객체 공유
 module.exports = MemoTable;

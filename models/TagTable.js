@@ -61,27 +61,27 @@ class TagTable {
     }
 }
 
-// readById 테스트
-(async () => {
-    const tag1 = await TagTable.readById(1);
-    console.log(tag1);
-    const tag2 = await TagTable.readById(3);
-    console.log(tag2);
-})()
-    .catch(err => {
-        console.error(err.message);
-    });
+// // readById 테스트
+// (async () => {
+//     const tag1 = await TagTable.readById(1);
+//     console.log(tag1);
+//     const tag2 = await TagTable.readById(3);
+//     console.log(tag2);
+// })()
+//     .catch(err => {
+//         console.error(err.message);
+//     });
 
-// read 테스트
-(async () => {
-    const tt = await TagTable.read();
-    tt.add("book");
-    tt.add("study");
-    console.log(tt);
-    await tt.write();
-})()
-    .catch(err => {
-        console.error(err.message);
-    });
+// // read 테스트
+// (async () => {
+//     const tt = await TagTable.read();
+//     tt.add("book");
+//     tt.add("study");
+//     console.log(tt);
+//     await tt.write();
+// })()
+//     .catch(err => {
+//         console.error(err.message);
+//     });
 
 module.exports = TagTable;
