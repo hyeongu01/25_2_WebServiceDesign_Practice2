@@ -17,5 +17,8 @@
     "url": "https://github.com/hyeongu01/25_2_WebServiceDesign_Practice2/issues"
   },
   "homepage": "https://github.com/hyeongu01/25_2_WebServiceDesign_Practice2#readme",
-  "type": "commonjs"
+  "type": "commonjs",
+  "dependencies": {
+    "dotenv": "^17.2.3"
+  }
 }

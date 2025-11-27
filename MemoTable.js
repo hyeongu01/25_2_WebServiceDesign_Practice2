@@ -41,7 +41,8 @@ class MemoTable {
     }
 
     async write() {
-        await fs.writeFile(this.path, JSON.stringify(this), {encoding: "utf-8"});
+        const json = JSON.stringify(this);
+        await fs.writeFile(this.path, json, {encoding: "utf-8"});
     }
 
     static fromJsonObject(json) {

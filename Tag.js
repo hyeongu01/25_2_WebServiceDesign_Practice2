@@ -5,14 +5,9 @@ class Tag {
         this.createdAt = createdAt
     }
 
-    static fromJson(json) {
-
-    }
-
-    static fromString(str) {
-
+    static read(json) {
+        return new Tag(json.id, json.name, json.createdAt);
     }
 }
-
 
 module.exports = Tag;
