@@ -45,13 +45,18 @@
   - 201 Created
     ```json
     {
-      "id": 0,
-      "title": "test0",
-      "content": "testestsfdsfsdfaf",
-      "createdAt": 1764257258171,
-      "updatedAt": 1764257258171,
-      "deletedAt": null,
-      "tagId": null
+        "data": {
+            "id": 0,
+            "title": "test0",
+            "content": "testestsfdsfsdfaf",
+            "createdAt": 1764257258171,
+            "updatedAt": 1764257258171,
+            "deletedAt": null,
+            "tagId": null
+        },
+        "meta": {
+            "timestamp": 1764257258171
+        }
     }
     ```
   - 400 Bad Request
@@ -74,9 +79,14 @@
   - 201 Created
     ```json
     {
-        "id": 0,
-        "name": "book",
-        "createdAt": 1764256356888
+        "data": {
+            "id": 0,
+            "name": "book",
+            "createdAt": 1764256356888
+        },
+        "meta": {
+            "timestamp": 1764256356888
+        }
     }
     ```
   - 400 Bad Request
@@ -93,27 +103,32 @@
   - 200 OK
     ```json
     {
-        "counts": 2,
-        "memos": [
-            {
-                "id": 0,
-                "title": "test0",
-                "content": "testestsfdsfsdfaf",
-                "createdAt": 1764257258171,
-                "updatedAt": 1764257258171,
-                "deletedAt": null,
-                "tagId": null
-            },
-            {
-                "id": 1,
-                "title": "test1",
-                "content": "testestsfdsfsdfaf",
-                "createdAt": 1764257277114,
-                "updatedAt": 1764257277114,
-                "deletedAt": null,
-                "tagId": null
-            }
-        ]
+        "data": {
+            "counts": 2,
+            "memos": [
+                {
+                    "id": 0,
+                    "title": "test0",
+                    "content": "testestsfdsfsdfaf",
+                    "createdAt": 1764257258171,
+                    "updatedAt": 1764257258171,
+                    "deletedAt": null,
+                    "tagId": null
+                },
+                {
+                    "id": 1,
+                    "title": "test1",
+                    "content": "testestsfdsfsdfaf",
+                    "createdAt": 1764257277114,
+                    "updatedAt": 1764257277114,
+                    "deletedAt": null,
+                    "tagId": null
+                }
+            ]
+        },
+        "meta": {
+            "timestamp": 1764257277114
+        }
     }
     ```
 
@@ -124,13 +139,18 @@
   - 200 OK
     ```json
     {
-        "id": 1,
-        "title": "test1",
-        "content": "testestsfdsfsdfaf",
-        "createdAt": 1764257277114,
-        "updatedAt": 1764257277114,
-        "deletedAt": null,
-        "tagId": null
+        "data": {
+            "id": 1,
+            "title": "test1",
+            "content": "testestsfdsfsdfaf",
+            "createdAt": 1764257277114,
+            "updatedAt": 1764257277114,
+            "deletedAt": null,
+            "tagId": null
+        },
+        "meta": {
+            "timestamp": 1764257277114
+        }
     }
     ```
   - 404 Not Found
@@ -141,7 +161,171 @@
     }
     ```
 
-## 5. 
+## 5. 태그 전체 읽기
+- `GET` - `"/api/tags"`
+- 요청 예시: `GET /api/tags`
+- 응답 예시
+  - 200 OK
+    ```json
+    {
+        "data": {
+            "counts": 2,
+            "tags": [
+                {
+                    "id": 0,
+                    "name": "book",
+                    "createdAt": 1764256356888
+                },
+                {
+                    "id": 1,
+                    "name": "study",
+                    "createdAt": 1764256356888
+                }
+            ]
+        },
+        "meta": {
+            "timestamp": 1764256356888
+        }
+    }
+    ```
+
+## 6. 메모 수정
+- `PUT` - `"/api/memos/:{id}"`
+- 요청 예시
+    ```json
+    {
+        "title": "updated title",
+        "content": "updated content",
+        "tagId": 1
+    }
+    ```
+- 응답 예시
+  - 200 OK - 값 변경 완료
+    ```json
+    {
+        "data": {
+            "id": 1,
+            "title": "test0",
+            "content": "testestsfdsfsdfaf",
+            "createdAt": 1764257258171,
+            "updatedAt": 1764257258171,
+            "deletedAt": null,
+            "tagId": null
+        },
+        "meta": {
+            "timestamp": 1764256356888
+        }
+    }
+    ```
+  - 204 No Content - 변경된 값이 없을 떄
+    - 응답 body 없음
+  - 404 Not Found
+    ```json
+    {
+        "error": "not_found",
+        "message": "id == 1 인 메모를 찾을 수 없습니다."
+    }
+    ```
+
+## 7. 메모 삭제 (Soft Delete)
+- `DELETE` - `"/api/memos/:{id}"`
+- 요청 형식: `DELETE /api/memos/1`
+- 응답 형식
+  - 200 OK
+    ```json
+    {
+        "data": {
+            "id": 1,
+            "deletedAt": 1764256356888
+        },
+        "meta": {
+            "timestamp": 1764256356888
+        }
+    }
+    ```
+  - 404 Not Found
+    ```json
+    {
+        "error": "not_found",
+        "message": "id == 1 인 메모를 찾을 수 없습니다."
+    }
+    ```
+
+## 8. 휴지통 확인
+- `GET` - `"/api/memos/trash"`
+- 요청 형식: `GET /api/memos/trash`
+- 응답 형식
+  - 200 OK
+    ```json
+    {
+        "data": {
+            "counts": 1,
+            "memos": [
+                {
+                    "id": 2,
+                    "title": "updated test3",
+                    "content": "testestsfdsfsdfaf",
+                    "createdAt": 1764257280650,
+                    "updatedAt": 1764257871757,
+                    "deletedAt": 1764257914434,
+                    "tagId": null
+                }
+            ]
+        },
+        "meta": {
+            "timestamp": 1764256356888
+        }
+    }
+    ```
+
+## 9. 메모 복구
+- `PATCH` - `/api/memos/trash/:{id}`
+- 요청 형식: `PATCH /api/memos/trash/2`
+- 응답 형식
+  - 200 OK - 복구 성공
+    ```json
+    {
+        "data": {
+            "id": 2
+        },
+        "meta": {
+            "timestamp": 1764256356888
+        }
+    }
+    ```
+
+  - 204 No Content - 삭제되지 않은 메모
+    - 응답 body 없음
+  - 404 Not Found - ID 를 찾을 수 없음
+    ```json
+    {
+        "error": "not_found",
+        "message": "id == 1 인 메모를 찾을 수 없습니다."
+    }
+    ```
+
+## 10. 태그 삭제 (Hard Delete)
+- `DELETE` - `/api/tags/:{id}`
+- 요청 형식: `DELETE /api/tags/1`
+- 응답 형식
+  - 200 OK
+    ```json
+    {
+        "data": {
+            "id": 1
+        },
+        "meta": {
+            "timestamp": 1764256356888
+        }
+    }
+    ```
+  - 404 Not Found
+    ```json
+    {
+        "error": "not_found",
+        "message": "id == 1 인 태그를 찾을 수 없습니다."
+    }
+    ```
 
 <!-- </div>
 </details> -->
