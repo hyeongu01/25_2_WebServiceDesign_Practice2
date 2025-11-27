@@ -1,0 +1,15 @@
+{
+  "nextId": 2,
+  "data": [
+    {
+      "id": 0,
+      "name": "book",
+      "createdAt": 1764256356888
+    },
+    {
+      "id": 1,
+      "name": "study",
+      "createdAt": 1764256356888
+    }
+  ]
+}

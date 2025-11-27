@@ -1,4 +1,4 @@
-require("dotenv").config();
+require("dotenv").config({ silent: true });
 
 module.exports = {
     MEMO_PATH: process.env.MEMO_PATH,

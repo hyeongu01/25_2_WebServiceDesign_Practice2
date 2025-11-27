@@ -27,6 +27,125 @@
 | 9    | 메모 복구                   | 휴지통의 메모 복원        | U    |
 | 10   | 태그 삭제 (Hard Delete) | 태그 데이터 완전 제거     | D    |
 
+<!-- <details>
+<summary>각 기능 세부 설계</summary>
+<div markdown="1"> -->
+
+## 1. 메모 생성
+- `POST` - `"/api/memos"`
+- 요청 예시
+  ```json
+  {
+    "title": "첫 번째 메모",
+    "content": "메모 본문",
+    "tagId": 1
+  }
+  ```
+- 응답 예시
+  - 201 Created
+    ```json
+    {
+      "id": 0,
+      "title": "test0",
+      "content": "testestsfdsfsdfaf",
+      "createdAt": 1764257258171,
+      "updatedAt": 1764257258171,
+      "deletedAt": null,
+      "tagId": null
+    }
+    ```
+  - 400 Bad Request
+    ```json
+    {
+        "error": "bad_request",
+        "message": "Memo title must be at least 1 character."
+    }
+    ```
+
+## 2. 태그 생성
+- `POST` - `"/api/tags"`
+- 요청 예시
+    ```json
+    {
+        "name": "book"
+    }
+    ```
+- 응답 예시
+  - 201 Created
+    ```json
+    {
+        "id": 0,
+        "name": "book",
+        "createdAt": 1764256356888
+    }
+    ```
+  - 400 Bad Request
+    ```json
+    {
+        "error": "bad_request",
+        "message": "Tag name must be at least 1 character."
+    }
+    ```
+
+## 3. 메모 전체 읽기
+- `GET` - `"/api/memos"`
+- 응답 예시
+  - 200 OK
+    ```json
+    {
+        "counts": 2,
+        "memos": [
+            {
+                "id": 0,
+                "title": "test0",
+                "content": "testestsfdsfsdfaf",
+                "createdAt": 1764257258171,
+                "updatedAt": 1764257258171,
+                "deletedAt": null,
+                "tagId": null
+            },
+            {
+                "id": 1,
+                "title": "test1",
+                "content": "testestsfdsfsdfaf",
+                "createdAt": 1764257277114,
+                "updatedAt": 1764257277114,
+                "deletedAt": null,
+                "tagId": null
+            }
+        ]
+    }
+    ```
+
+## 4. 메모 선택 읽기
+- `GET` - `"/api/memos/:{id}"`
+- 요청 예시: `GET /api/memos/1`
+- 응답 예시
+  - 200 OK
+    ```json
+    {
+        "id": 1,
+        "title": "test1",
+        "content": "testestsfdsfsdfaf",
+        "createdAt": 1764257277114,
+        "updatedAt": 1764257277114,
+        "deletedAt": null,
+        "tagId": null
+    }
+    ```
+  - 404 Not Found
+    ```json
+    {
+        "error": "not_found",
+        "message": "id == 1 인 메모가 없거나 삭제된 상태입니다."
+    }
+    ```
+
+## 5. 
+
+<!-- </div>
+</details> -->
+
 ### ERD 작성
 > 링크: [dbdiagram.io](https://dbdiagram.io/d/MemoPad-ERD-690196a7357668b7321b5f31)
 
@@ -60,6 +179,4 @@ Table Tag {
 </div>
 </details>
 
-
-### Memo 를 다루는 객체 생성
 
