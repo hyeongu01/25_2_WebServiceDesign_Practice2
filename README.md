@@ -96,6 +96,13 @@
         "message": "Tag name must be at least 1 character."
     }
     ```
+  - 409 Conflict
+    ```json
+    {
+        "error": "Conflict",
+        "message": "이미 동일한 name 의 태그가 있습니다." 
+    }
+    ```
 
 ## 3. 메모 전체 읽기
 - `GET` - `"/api/memos"`
@@ -239,6 +246,8 @@
         }
     }
     ```
+  - 204 No Content
+    - 응답 body 없음
   - 404 Not Found
     ```json
     {
