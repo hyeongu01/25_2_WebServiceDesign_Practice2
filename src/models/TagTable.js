@@ -43,15 +43,17 @@ class TagTable {
         // 중복되는 이름 찾기
         const tag = this.data.find(m => m.name === name);
         if (tag) {
-            throw new Error(`[error] tagName: ${name} 인 tag 가 이미 있습니다.`);
+            return "conflict"
         }
 
         // 빈 문자열 혹은 빈 값 처리
         if (!name) {
-            throw new Error("태그 이름은 1자 이상으로 지어주세요!");
+            return "bad_request"
         }
 
-        this.data.push(new Tag(this.nextId ++, name));    
+        const newTag = new Tag(this.nextId ++, name);
+        this.data.push(newTag);
+        return newTag;
     }
 
     delete(id) {

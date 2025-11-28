@@ -70,28 +70,44 @@ class MemoTable {
 
     update(id, {title, content, tagId}) {
         if (title === undefined && content === undefined && tagId === undefined) {
-            throw new Error("[MemoTable update error] 변경되는 값이 없습니다.")
+            return "no_change";
         }
 
         const target = this.data.find(m => m.id === id);
         if (!target) {
-            throw new Error(`[MemoTable update error] memoId == ${id} 인 메모가 없습니다.`);
+            return "not_found";
         }
 
         target.update({newTitle: title, newContent: content, newTag: tagId});
+        return target;
     }
 
     delete(id) {
         const target = this.data.find(m => m.id === id);
         if (!target) {
-            throw new Error(`[MemoTable delete error] memoId == ${id} 인 메모가 없습니다.`);
+            return "not_found";
         }
 
         if (target.deletedAt) {
-            throw new Error(`[MemoTable delete error] memoId == ${id} 인 메모는 ${new Date(target.deletedAt).toLocaleString()} 에 이미 삭제되었습니다.`)
+            return "no_change"
         }
 
         target.delete();
+        return target;
+    }
+
+    restore(id) {
+        const target = this.data.find(m => m.id === id);
+        if (!target) {
+            return "not_found";
+        }
+
+        if (!target.deletedAt) {
+            return "no_change"
+        }
+
+        target.restore();
+        return target;
     }
 }
 

@@ -2,10 +2,12 @@ const express = require("express");
 const app = express();
 
 const memoRouter = require("./routers/memoRouter");
+const tagRouter = require("./routers/tagRouter");
 
 app.use(express.json());
 
 app.use("/api/memos", memoRouter);
+app.use("/api/tags", tagRouter);
 
 
 app.get("/", (req, res) => {

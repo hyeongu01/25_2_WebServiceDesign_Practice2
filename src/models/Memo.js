@@ -51,6 +51,10 @@ class Memo {
     delete() {
         this.deletedAt = Date.now();
     }
+
+    restore() {
+        this.deletedAt = null;
+    }
 }
 
 module.exports = Memo;

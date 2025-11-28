@@ -367,3 +367,17 @@ Table Tag {
 </details>
 
 
+### 📕 미들웨어 구상
+1. 요청 body 를 json 형식으로 파싱
+2. memo 를 추가할 때 tagId 가 있다면 해당 tagId 가 존재하는지 확인
+3. tagId 를 삭제할 때 memo 가 하나라도 tagId를 가진다면 에러 반환
+4. 로깅 기능 (선택)
+
+```js
+// 1. 요청 body 를 json 형식으로 파싱
+app.use(express.json());
+
+// 4. 로깅 기능
+
+
+```

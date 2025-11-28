@@ -1,19 +1,8 @@
 // 요청 처리, 응답 코드 모음
+const Memo = require("../models/Memo");
 const MemoTable = require("../models/MemoTable");
 
-const RequestForm = (data, meta) => {
-    return {
-        data: data,
-        meta: meta
-    }
-}
-
-const ErrorRequestForm = (error, message) => {
-    return {
-        error: error,
-        message: message
-    }
-}
+const { RequestForm, ErrorRequestForm } = require("./requestForm")
 
 module.exports = {
     // 1. 메모 생성
@@ -34,15 +23,15 @@ module.exports = {
             const newMemo = mt.add(title, content, tagId);
             await mt.write()
 
-            return res.status(201).json({
-                data: newMemo,
-                meta: { timestamp: Date.now() }
-            });
+            return res.status(201).json(RequestForm(
+                newMemo, 
+                { timestamp: Date.now() }
+            ));
         } catch (err) {
-            return res.status(400).json({
-                error: "bad_request",
-                message: err.message
-            });
+            return res.status(400).json(ErrorRequestForm(
+                "bad_request", 
+                err.message
+            ));
         }
     },
 
@@ -53,112 +42,121 @@ module.exports = {
         // 삭제된거 필터링
         memos = memos.filter(m => m.deletedAt === null);
 
-        return res.status(200).json({
-            data: memos,
-            meta: {
-                counts: memos.length,
-                timestamp: Date.now()
-            }
-        });
+        return res.status(200).json(RequestForm(memos, {counts: memos.length, timestamp: Date.now()}));
     }, 
 
-//     // 4. 메모 선택 읽기
-//     async getMemoById(req, res) {
-//         const id = Number(req.params.id);
+    // 4. 메모 선택 읽기
+    async getMemoById(req, res) {
+        const id = Number(req.params.id);
 
-//         const memo = await memoService.getMemoById(id);
-//         if (!memo || memo.deletedAt !== null) {
-//             return res.status(404).json({
-//                 error: "not_found",
-//                 message: `id == ${id} 인 메모가 없거나 삭제된 상태입니다.`
-//             });
-//         }
+        try {
+            const memo = await MemoTable.readById(id);
 
-//         return res.status(200).json({
-//             data: memo,
-//             meta: { timestamp: Date.now() }
-//         });
-//     },
+            if (memo.deletedAt !== null) {
+                throw new Error(`id: ${id}인 메모는 ${new Date(memo.deletedAt).toLocaleString()} 에 삭제되었습니다.`);
+            }
 
-//     // 6. 메모 수정
-//     async updateMemo(req, res) {
-//         const id = Number(req.params.id);
-//         const { title, content, tagId } = req.body;
+            return res.status(200).json(RequestForm(
+                memo,
+                {timestamp: Date.now()}
+            ));
+        } catch(err) {
+            return res.status(404).json(ErrorRequestForm(
+                "not_found",
+                err.message
+            ))
+        }
+    },
 
-//         const result = await memoService.updateMemo(id, { title, content, tagId });
+    // 6. 메모 수정
+    async updateMemo(req, res) {
+        const id = Number(req.params.id);
+        const { title, content, tagId } = req.body;
 
-//         if (result === "not_found") {
-//             return res.status(404).json({
-//                 error: "not_found",
-//                 message: `id == ${id} 인 메모를 찾을 수 없습니다.`
-//             });
-//         }
+        const mt = await MemoTable.read();
+        const result = mt.update(id, {title, content, tagId});
 
-//         if (result === "no_change") {
-//             return res.status(204).send(); // body 없음
-//         }
+        if (result === "not_found") {
+            return res.status(404).json({
+                error: "not_found",
+                message: `id == ${id} 인 메모를 찾을 수 없습니다.`
+            });
+        }
 
-//         return res.status(200).json({
-//             data: result,
-//             meta: { timestamp: Date.now() }
-//         });
-//     },
+        if (result === "no_change") {
+            return res.status(204).send();
+        }
 
-//     // 7. Soft Delete
-//     async deleteMemo(req, res) {
-//         const id = Number(req.params.id);
+        await mt.write();
+        return res.status(200).json(RequestForm(
+            result,
+            {timestamp: Date.now()}
+        ))
+    },
 
-//         const deleted = await memoService.deleteMemo(id);
+    // 7. Soft Delete
+    async deleteMemo(req, res) {
+        const id = Number(req.params.id);
 
-//         if (!deleted) {
-//             return res.status(404).json({
-//                 error: "not_found",
-//                 message: `id == ${id} 인 메모를 찾을 수 없습니다.`
-//             });
-//         }
+        const mt = await MemoTable.read();
+        const result = mt.delete(id);
 
-//         return res.status(200).json({
-//             data: {
-//                 id: deleted.id,
-//                 deletedAt: deleted.deletedAt
-//             },
-//             meta: { timestamp: Date.now() }
-//         });
-//     },
+        if (result === "not_found") {
+            return res.status(404).json(ErrorRequestForm(
+                "not_found",
+                `id == ${id} 인 메모를 찾을 수 없습니다.`
+            ))
+        }
 
-//     // 8. 휴지통 조회
-//     async getDeletedMemos(req, res) {
-//         const deleted = await memoService.getDeletedMemos();
+        if (result === "no_change") {
+            return res.status(204).send();
+        }
+        await mt.write();
 
-//         return res.status(200).json({
-//             data: deleted,
-//             meta: {
-//                 counts: deleted.length,
-//                 timestamp: Date.now()
-//             }
-//         });
-//     },
+        return res.status(200).json({
+            data: {
+                id: result.id,
+                deletedAt: result.deletedAt
+            },
+            meta: { timestamp: Date.now() }
+        });
+    },
 
-//     // 9. 복구
-//     async restoreMemo(req, res) {
-//         const id = Number(req.params.id);
+    // 8. 휴지통 조회
+    async getDeletedMemos(req, res) {
+        const mt = await MemoTable.read();
+        const deletedMemos = mt.data.filter(m => m.deletedAt !== null);
+        
+        return res.status(200).json(RequestForm(
+            deletedMemos,
+            {
+                counts: deletedMemos.length,
+                timestamp: Date.now()
+            }
+        ));
+    },
 
-//         const restored = await memoService.restoreMemo(id);
+    // 9. 메모 복구
+    async restoreMemo(req, res) {
+        const id = Number(req.params.id);
 
-//         if (restored === "not_found") {
-//             return res.status(404).json({
-//                 error: "not_found",
-//                 message: `id == ${id} 인 메모를 찾을 수 없습니다.`
-//             });
-//         }
+        const mt = await MemoTable.read();
+        const result = mt.restore(id);
 
-//         if (restored === "not_deleted") {
-//             return res.status(204).send(); // 삭제되지 않은 메모
-//         }
+        if (result === "not_found") {
+            return res.status(404).json(ErrorRequestForm(
+                "not_found",
+                `id == ${id} 인 메모를 찾을 수 없습니다.`
+            ));
+        }
 
-//         return res.status(200).json({
-//             data: { id },
-//             meta: { timestamp: Date.now() }
-//         });
-//     }
+        if (result === "no_change") {
+            return res.status(204).send(); // 이미 삭제된 메모
+        }
+
+        return res.status(200).json(RequestForm(
+            {id: id},
+            {timestamp: Date.now()}
+        ));
+    }
 };
