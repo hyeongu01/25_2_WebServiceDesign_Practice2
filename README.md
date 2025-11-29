@@ -397,3 +397,9 @@ const validateTagDelete = require("../middlewares/validateTagDelete");
 // 10. 태그 삭제
 router.delete("/:id", validateTagDelete, tagController.deleteTag);
 ```
+
+### ✅ Postman을 활용한 테스트
+> Postman export 한 파일은 `/PostmanExports.json` 입니다!
+
+> 테스트 하며 캡쳐한 사진은 `/pictures` 에 모았습니다.
+

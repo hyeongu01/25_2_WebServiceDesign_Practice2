@@ -1,0 +1,761 @@
+{
+	"info": {
+		"_postman_id": "7d903fb4-08a8-4ee7-90db-b9cdf29165b4",
+		"name": "Practice_02",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "48959310",
+		"_collection_link": "https://cdy5212-9212695.postman.co/workspace/%EC%B5%9C%ED%98%84%EC%9A%B0's-Workspace~fd359e80-ad27-4e64-8564-3328ae7d4f1b/collection/48959310-7d903fb4-08a8-4ee7-90db-b9cdf29165b4?action=share&source=collection_link&creator=48959310"
+	},
+	"item": [
+		{
+			"name": "1_createMemo",
+			"item": [
+				{
+					"name": "정상동작_1",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"첫 번째 메모 생성\",\n    \"content\": \"메모 본문\",\n    \"tagId\": null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://113.198.66.75:13135/api/memos",
+							"protocol": "http",
+							"host": [
+								"113",
+								"198",
+								"66",
+								"75"
+							],
+							"port": "13135",
+							"path": [
+								"api",
+								"memos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "정상동작_2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"두 번째 메모 생성\",\n    \"content\": \"메모 본문\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://113.198.66.75:13135/api/memos",
+							"protocol": "http",
+							"host": [
+								"113",
+								"198",
+								"66",
+								"75"
+							],
+							"port": "13135",
+							"path": [
+								"api",
+								"memos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "제목이 없을경우",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content\": \"메모 본문\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://113.198.66.75:13135/api/memos",
+							"protocol": "http",
+							"host": [
+								"113",
+								"198",
+								"66",
+								"75"
+							],
+							"port": "13135",
+							"path": [
+								"api",
+								"memos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "태그가 없을 떄",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"태그가 잘못된 메모\",\n    \"content\": \"본문\",\n    \"tagId\": 99\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://113.198.66.75:13135/api/memos",
+							"protocol": "http",
+							"host": [
+								"113",
+								"198",
+								"66",
+								"75"
+							],
+							"port": "13135",
+							"path": [
+								"api",
+								"memos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "2_createTag",
+			"item": [
+				{
+					"name": "정상 동작",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"book\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://113.198.66.75:13135/api/tags",
+							"protocol": "http",
+							"host": [
+								"113",
+								"198",
+								"66",
+								"75"
+							],
+							"port": "13135",
+							"path": [
+								"api",
+								"tags"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "이미 있는 name",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"book\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://113.198.66.75:13135/api/tags",
+							"protocol": "http",
+							"host": [
+								"113",
+								"198",
+								"66",
+								"75"
+							],
+							"port": "13135",
+							"path": [
+								"api",
+								"tags"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "빈 name",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://113.198.66.75:13135/api/tags",
+							"protocol": "http",
+							"host": [
+								"113",
+								"198",
+								"66",
+								"75"
+							],
+							"port": "13135",
+							"path": [
+								"api",
+								"tags"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "3_getAllMemos",
+			"item": [
+				{
+					"name": "1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"첫 번째 메모 생성\",\n    \"content\": \"메모 본문\",\n    \"tagId\": 1\n}"
+						},
+						"url": {
+							"raw": "http://113.198.66.75:13135/api/memos",
+							"protocol": "http",
+							"host": [
+								"113",
+								"198",
+								"66",
+								"75"
+							],
+							"port": "13135",
+							"path": [
+								"api",
+								"memos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "4_getMemoById",
+			"item": [
+				{
+					"name": "정상 동작",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://113.198.66.75:13135/api/memos/2",
+							"protocol": "http",
+							"host": [
+								"113",
+								"198",
+								"66",
+								"75"
+							],
+							"port": "13135",
+							"path": [
+								"api",
+								"memos",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "없는 메모 검색",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://113.198.66.75:13135/api/memos/10",
+							"protocol": "http",
+							"host": [
+								"113",
+								"198",
+								"66",
+								"75"
+							],
+							"port": "13135",
+							"path": [
+								"api",
+								"memos",
+								"10"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "5_getAllTags",
+			"item": [
+				{
+					"name": "정상 동작",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://113.198.66.75:13135/api/tags",
+							"protocol": "http",
+							"host": [
+								"113",
+								"198",
+								"66",
+								"75"
+							],
+							"port": "13135",
+							"path": [
+								"api",
+								"tags"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "6_updateMemo",
+			"item": [
+				{
+					"name": "정상동작_1",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"업데이트된 메모 타이틀\",\n    \"content\": \"변경된 메모 본문\",\n    \"tagId\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://113.198.66.75:13135/api/memos/2",
+							"protocol": "http",
+							"host": [
+								"113",
+								"198",
+								"66",
+								"75"
+							],
+							"port": "13135",
+							"path": [
+								"api",
+								"memos",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "id를 찾을 수 없는 경우",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"업데이트된 메모 타이틀\",\n    \"content\": \"변경된 메모 본문\",\n    \"tagId\": null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://113.198.66.75:13135/api/memos/99",
+							"protocol": "http",
+							"host": [
+								"113",
+								"198",
+								"66",
+								"75"
+							],
+							"port": "13135",
+							"path": [
+								"api",
+								"memos",
+								"99"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "변경할 값이 없는경우",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://113.198.66.75:13135/api/memos/2",
+							"protocol": "http",
+							"host": [
+								"113",
+								"198",
+								"66",
+								"75"
+							],
+							"port": "13135",
+							"path": [
+								"api",
+								"memos",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "태그가없을때",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"업데이트된 메모 타이틀\",\n    \"content\": \"변경된 메모 본문\",\n    \"tagId\": 99\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://113.198.66.75:13135/api/memos/2",
+							"protocol": "http",
+							"host": [
+								"113",
+								"198",
+								"66",
+								"75"
+							],
+							"port": "13135",
+							"path": [
+								"api",
+								"memos",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "7_deleteMemo",
+			"item": [
+				{
+					"name": "정상 삭제",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://113.198.66.75:13135/api/memos/0",
+							"protocol": "http",
+							"host": [
+								"113",
+								"198",
+								"66",
+								"75"
+							],
+							"port": "13135",
+							"path": [
+								"api",
+								"memos",
+								"0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "id를 찾을 수 없는경우",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://113.198.66.75:13135/api/memos/99",
+							"protocol": "http",
+							"host": [
+								"113",
+								"198",
+								"66",
+								"75"
+							],
+							"port": "13135",
+							"path": [
+								"api",
+								"memos",
+								"99"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "8_getDeletedMemos",
+			"item": [
+				{
+					"name": "정상동작",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://113.198.66.75:13135/api/memos/trash",
+							"protocol": "http",
+							"host": [
+								"113",
+								"198",
+								"66",
+								"75"
+							],
+							"port": "13135",
+							"path": [
+								"api",
+								"memos",
+								"trash"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "삭제된 메모가 없는경우",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://113.198.66.75:13135/api/memos/trash",
+							"protocol": "http",
+							"host": [
+								"113",
+								"198",
+								"66",
+								"75"
+							],
+							"port": "13135",
+							"path": [
+								"api",
+								"memos",
+								"trash"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "9_restoreMemo",
+			"item": [
+				{
+					"name": "삭제되지 않은 메모 복구",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://113.198.66.75:13135/api/memos/trash/2",
+							"protocol": "http",
+							"host": [
+								"113",
+								"198",
+								"66",
+								"75"
+							],
+							"port": "13135",
+							"path": [
+								"api",
+								"memos",
+								"trash",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "정상동작",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://113.198.66.75:13135/api/memos/trash/0",
+							"protocol": "http",
+							"host": [
+								"113",
+								"198",
+								"66",
+								"75"
+							],
+							"port": "13135",
+							"path": [
+								"api",
+								"memos",
+								"trash",
+								"0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "없는 Id",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://113.198.66.75:13135/api/memos/trash/99",
+							"protocol": "http",
+							"host": [
+								"113",
+								"198",
+								"66",
+								"75"
+							],
+							"port": "13135",
+							"path": [
+								"api",
+								"memos",
+								"trash",
+								"99"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "10_deleteTag",
+			"item": [
+				{
+					"name": "정상 동작",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://113.198.66.75:13135/api/tags/0",
+							"protocol": "http",
+							"host": [
+								"113",
+								"198",
+								"66",
+								"75"
+							],
+							"port": "13135",
+							"path": [
+								"api",
+								"tags",
+								"0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "해당 tag를 다른 메모가 참조하는 경우",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://113.198.66.75:13135/api/tags/1",
+							"protocol": "http",
+							"host": [
+								"113",
+								"198",
+								"66",
+								"75"
+							],
+							"port": "13135",
+							"path": [
+								"api",
+								"tags",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "태그가 없는경우",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://113.198.66.75:13135/api/tags/99",
+							"protocol": "http",
+							"host": [
+								"113",
+								"198",
+								"66",
+								"75"
+							],
+							"port": "13135",
+							"path": [
+								"api",
+								"tags",
+								"99"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
