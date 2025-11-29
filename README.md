@@ -437,4 +437,9 @@ json 형식으로 데이터를 저장하는 MemoPad를 만들었습니다.
   - json 형식으로 데이터가 저장될 경로를 저장하는 전역변수를 관리하는 파일, `config.js` 가 읽어서 전역변수화 한다.
 - `data/tempMemo.json`, `data/tempTag.json`
   - 데이터를 저장하는 json 파일
-
+- `server.js`
+  - 백엔드 서버를 실행하는 파일
+- `app.js`
+  - express 의 app 을 선언하는 파일
+- `models` 폴더
+  - json 형식의 데이터를 관리하기 위한 객체들의 모임
