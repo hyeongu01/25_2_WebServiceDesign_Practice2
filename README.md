@@ -403,3 +403,38 @@ router.delete("/:id", validateTagDelete, tagController.deleteTag);
 
 > 테스트 하며 캡쳐한 사진은 `/pictures` 에 모았습니다.
 
+### 간단 정리
+json 형식으로 데이터를 저장하는 MemoPad를 만들었습니다.
+
+- 폴더 구조
+    ```
+    ./src
+    ├── routers
+    │   ├── tagRouter.js
+    │   └── memoRouter.js
+    ├── middlewares
+    │   ├── validateTagDelete.js
+    │   └── validateTagId.js
+    ├── models
+    │   ├── Memo.js
+    │   ├── MemoTable.js
+    │   ├── Tag.js
+    │   └── TagTable.js
+    ├── controllers
+    │   ├── tagController.js
+    │   ├── memoController.js
+    │   └── requestForm.js
+    ├── data
+    │   ├── tempMemo.json
+    │   └── tempTag.json
+    ├── .env
+    ├── config.js
+    ├── server.js
+    └── app.js
+    ```
+
+- `.env` 파일
+  - json 형식으로 데이터가 저장될 경로를 저장하는 전역변수를 관리하는 파일, `config.js` 가 읽어서 전역변수화 한다.
+- `data/tempMemo.json`, `data/tempTag.json`
+  - 데이터를 저장하는 json 파일
+
