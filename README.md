@@ -378,13 +378,22 @@ Table Tag {
 1. 요청 body 를 json 형식으로 파싱
 2. memo 를 추가할 때 tagId 가 있다면 해당 tagId 가 존재하는지 확인
 3. tagId 를 삭제할 때 memo 가 하나라도 tagId를 가진다면 에러 반환
-4. 로깅 기능 (선택)
 
 ```js
 // 1. 요청 body 를 json 형식으로 파싱
 app.use(express.json());
 
-// 4. 로깅 기능
+// 2. memo 를 추가할 때 tagId가 있다면 tagId가 존재하는지 확인
+// path = "/src/routers/memoRouter.js"
+const validateTagId = require("../middlewares/validateTagId");
+// 1. 메모 생성
+router.post("/", validateTagId, memoController.createMemo);
+// 6. 메모 수정
+router.put("/:id", validateTagId, memoController.updateMemo);
 
-
+// 3. tagId 를 사겢할 때 memo 가 하나라도 tagId를 가진다면 에러 반환
+// path = "/src/routers/tagRouter.js"
+const validateTagDelete = require("../middlewares/validateTagDelete");
+// 10. 태그 삭제
+router.delete("/:id", validateTagDelete, tagController.deleteTag);
 ```
