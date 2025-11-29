@@ -329,6 +329,13 @@
         "message": "id == 1 인 태그를 찾을 수 없습니다."
     }
     ```
+  - 409 Conflict
+    ```json
+    {
+        "error": "conflict",
+        "message": "해당 tag 를 참조하는 memo 가 [1, 2] 있습니다."
+    }
+    ```
 
 </div>
 </details>

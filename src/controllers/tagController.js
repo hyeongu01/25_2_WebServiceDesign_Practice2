@@ -1,12 +1,12 @@
 
-const TagTable = require("../models/MemoTable");
+const TagTable = require("../models/TagTable");
 const { RequestForm, ErrorRequestForm } = require("./requestForm");
 
 module.exports = {
     // 2. 태그 생성
     async createTag(req, res) {
         const tt = await TagTable.read();
-        const result = tt.add();
+        const result = tt.add(req.body.name);
 
         if (result === "conflict") {
             return res.status(409).json(ErrorRequestForm(
@@ -41,7 +41,16 @@ module.exports = {
 
     // 10. 태그 삭제
     async deleteTag(req, res) {
+        const tt = await TagTable.read();
+        const tagId = Number(req.params.id);
 
+        tt.delete(tagId);
+        await tt.write();
+
+        return res.status(200).json(RequestForm(
+            {id: tagId},
+            {timestamp: Date.now()}
+        ))
     }
 }
 

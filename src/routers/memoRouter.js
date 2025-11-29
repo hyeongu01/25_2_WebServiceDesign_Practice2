@@ -3,8 +3,11 @@ const express = require("express");
 const router = express.Router();
 const memoController = require("../controllers/memoController");
 
+// 미들웨어
+const validateTagId = require("../middlewares/validateTagId");
+
 // 1. 메모 생성
-router.post("/", memoController.createMemo);
+router.post("/", validateTagId, memoController.createMemo);
 
 // 3. 메모 전체 조회
 router.get("/", memoController.getAllMemos);
@@ -16,7 +19,7 @@ router.get("/trash", memoController.getDeletedMemos);
 router.get("/:id", memoController.getMemoById);
 
 // 6. 메모 수정
-router.put("/:id", memoController.updateMemo);
+router.put("/:id", validateTagId, memoController.updateMemo);
 
 // 7. 메모 삭제 (soft delete)
 router.delete("/:id", memoController.deleteMemo);

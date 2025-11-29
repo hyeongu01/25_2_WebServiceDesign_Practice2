@@ -24,9 +24,9 @@
       "title": "업데이트된 메모 타이틀",
       "content": "변경된 메모 본문",
       "createdAt": 1764311610685,
-      "updatedAt": 1764311731950,
+      "updatedAt": 1764394011940,
       "deletedAt": 1764312009460,
-      "tagId": null
+      "tagId": 2
     },
     {
       "id": 3,

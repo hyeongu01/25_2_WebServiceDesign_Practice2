@@ -1,5 +1,5 @@
 {
-  "nextId": 2,
+  "nextId": 4,
   "data": [
     {
       "id": 0,
@@ -10,6 +10,11 @@
       "id": 1,
       "name": "study",
       "createdAt": 1764256356888
+    },
+    {
+      "id": 2,
+      "name": "school",
+      "createdAt": 1764392758638
     }
   ]
 }
