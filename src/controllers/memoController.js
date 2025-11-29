@@ -153,6 +153,7 @@ module.exports = {
         if (result === "no_change") {
             return res.status(204).send(); // 이미 삭제된 메모
         }
+        await mt.write();
 
         return res.status(200).json(RequestForm(
             {id: id},
